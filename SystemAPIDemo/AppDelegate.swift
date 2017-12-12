@@ -16,8 +16,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        createTabBarController()
         return true
+    }
+    
+    func createTabBarController(){
+        var tabBarItemImage=UIImage(named: "barIcon")
+        tabBarItemImage=tabBarItemImage?.withRenderingMode(.alwaysOriginal)
+        
+        self.window=UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor=UIColor.white
+        
+        let tabBarController=UITabBarController()
+        self.window?.rootViewController=tabBarController
+        
+        let contactPickerCtl=ContactPickerViewController(nibName: "ContactPickerViewController", bundle: Bundle.main)
+        let contactPickerNav=UINavigationController(rootViewController: contactPickerCtl)
+        contactPickerNav.title="选取联系人"
+        contactPickerNav.tabBarItem.image=tabBarItemImage
+        tabBarController.addChildViewController(contactPickerNav)
+        
+        let contactsCtl=ContactsViewController(nibName: "ContactsViewController", bundle: Bundle.main)
+        let contactsNav=UINavigationController(rootViewController: contactsCtl)
+        contactsNav.title="联系人"
+        contactsNav.tabBarItem.image=tabBarItemImage
+        tabBarController.addChildViewController(contactsNav)
+        
+        let messagesCtl=MessagesViewController(nibName: "MessagesViewController", bundle: Bundle.main)
+        let messagesNav=UINavigationController(rootViewController: messagesCtl)
+        messagesNav.title="短信&电话&邮件"
+        messagesNav.tabBarItem.image=tabBarItemImage
+        tabBarController.addChildViewController(messagesNav)
+        
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
