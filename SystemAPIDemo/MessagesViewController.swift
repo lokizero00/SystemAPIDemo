@@ -53,6 +53,7 @@ class MessagesViewController: UIViewController, MFMessageComposeViewControllerDe
     }
     
     @objc func sendEmailButtonClicked(){
+//        检测系统是否支持发送邮件
         if MFMailComposeViewController.canSendMail() {
             let picker=MFMailComposeViewController()
             picker.mailComposeDelegate=self
@@ -89,6 +90,7 @@ class MessagesViewController: UIViewController, MFMessageComposeViewControllerDe
     }
     
     @objc func sendSMSButtonClicked(){
+//        检测系统是否支持发送短信
         if MFMessageComposeViewController.canSendText() {
             let controller=MFMessageComposeViewController()
             

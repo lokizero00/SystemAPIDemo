@@ -46,11 +46,15 @@ class ContactPickerViewController: UIViewController ,CNContactPickerDelegate,UIT
     }
     
     @objc func selectContacts(){
+//        实例化controller
        let contactPicker=CNContactPickerViewController()
+//        实现controller代理，方便我们使用回调函数
         contactPicker.delegate=self
-        //设置联系人过滤条件，不符合的联系人将无法选取
+//        设置联系人过滤条件，不符合的联系人将无法选取
 //        contactPicker.predicateForEnablingContact=NSPredicate(format: "givenName CONTAINS %@ && phoneNumbers.@count > 0", "D")
+//        设置需要查询的联系人关键字，所有后续操作需要用到的关键字，都必须在这里指定
         contactPicker.displayedPropertyKeys = [CNContactGivenNameKey,CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactEmailAddressesKey, CNContactBirthdayKey, CNContactImageDataKey]
+//        弹出系统联系人界面
         self.present(contactPicker, animated: true, completion: nil)
         
     }
@@ -90,8 +94,9 @@ class ContactPickerViewController: UIViewController ,CNContactPickerDelegate,UIT
     }
 
     //方法A，实现此方法，则方法B失效
-    //单联系人选择，当用户从列表里选择联系人后，触发此方法，并不进入联系人详情页
+    //单联系人选择，当用户从列表里选择联系人后，触发此方法，不进入联系人详情页
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+//        初始化table结果表格
         initTableViewData()
         
         let lastName=contact.familyName
@@ -102,11 +107,13 @@ class ContactPickerViewController: UIViewController ,CNContactPickerDelegate,UIT
         
         let phones=contact.phoneNumbers
         for phone in phones{
+            //获取phone的标签，有mobile、home等
             let phoneLabel=CNLabeledValue<NSString>.localizedString(forLabel: phone.label!)
             let phoneValue=phone.value.stringValue
             self.allResults![0]?.append("\(phoneLabel)：\(phoneValue)")
         }
         
+//        table表刷新
         resultTableView.reloadData()
     }
     
@@ -125,21 +132,23 @@ class ContactPickerViewController: UIViewController ,CNContactPickerDelegate,UIT
         ]
     }
     
-//    //方法B，需要注释方法A和C才能有效
-//    //选择联系人后，将进入详情页，当点击相应联系人属性时，触发此方法
-//    func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
-//        let contact = contactProperty.contact
-//
-//        let phoneNumber = contactProperty.value as! CNPhoneNumber
-//
-//        print(contact.givenName)
-//
-//        print(phoneNumber.stringValue)
-//    }
+    //方法B，需要注释方法A和C才能有效
+    //选择联系人后，将进入详情页，当点击相应联系人属性时，触发此方法
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
+//        获取联系人
+        let contact = contactProperty.contact
+//        获取联系人属性
+        let phoneNumber = contactProperty.value as! CNPhoneNumber
+
+        print(contact.givenName)
+
+        print(phoneNumber.stringValue)
+    }
     
     //方法C，实现此方法，则方法A失效
     //多联系人选择
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+//        初始化table结果表格
         initTableViewData()
         
         if contacts.count>0{
@@ -153,12 +162,14 @@ class ContactPickerViewController: UIViewController ,CNContactPickerDelegate,UIT
                 
                 let phones=contact.phoneNumbers
                 for phone in phones{
+//                    获取phone的标签，有mobile、home等
                     let phoneLabel=CNLabeledValue<NSString>.localizedString(forLabel: phone.label!)
                     let phoneValue=phone.value.stringValue
                     self.allResults![c_index!]?.append("\(phoneLabel)：\(phoneValue)")
                 }
             }
         }else{
+//            没有内容
             noContatsResult()
         }
         

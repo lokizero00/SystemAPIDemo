@@ -11,7 +11,6 @@
 		1236C6E51FD927A400C327B4 /* EditContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1236C6E31FD927A400C327B4 /* EditContactViewController.xib */; };
 		1236C6E81FDA3DEC00C327B4 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1236C6E61FDA3DEC00C327B4 /* MessagesViewController.swift */; };
 		1236C6E91FDA3DEC00C327B4 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1236C6E71FDA3DEC00C327B4 /* MessagesViewController.xib */; };
-		1236C6EC1FDA3F1200C327B4 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1236C6EB1FDA3F0700C327B4 /* Messages.framework */; };
 		1236C6ED1FDA3F1900C327B4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1236C6EA1FDA3EFE00C327B4 /* MessageUI.framework */; };
 		1265CF871FD12A950065151E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1265CF861FD12A950065151E /* AppDelegate.swift */; };
 		1265CF891FD12A950065151E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1265CF881FD12A950065151E /* ViewController.swift */; };
@@ -70,7 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1236C6ED1FDA3F1900C327B4 /* MessageUI.framework in Frameworks */,
-				1236C6EC1FDA3F1200C327B4 /* Messages.framework in Frameworks */,
 				1265CFA51FD1335B0065151E /* ContactsUI.framework in Frameworks */,
 				1265CFA41FD133550065151E /* Contacts.framework in Frameworks */,
 			);
